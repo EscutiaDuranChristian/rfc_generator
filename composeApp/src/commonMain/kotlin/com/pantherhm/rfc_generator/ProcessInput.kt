@@ -14,9 +14,11 @@ fun processName(name : String, input: Int) : List<String>? {
         //Error Control
         if(name.length < minLength) {
             errors.add(FoundError(input, InputError.InsufficientLength))
+            return null
         }
         else if(!name.trim().matches(Regex(nameRegex))) {
             errors.add(FoundError(input, InputError.BadFormat))
+            return null
         }
         val list = name.uppercase().split(" ").filter { it.isNotEmpty() }
         for(i in list.indices) {
@@ -36,7 +38,7 @@ fun processDate(date : String, input: Int) : String
     if (!date.isEmpty()) {
         //Error Control
         if(!dateRegex.matches(date)) {
-            errors.add(FoundError(input, InputError.BadFormat))
+            errors.add(FoundError(input, InputError.InvalidDate))
             return "XXXXXX"
         }
         return date.replace("/","")
